@@ -180,6 +180,6 @@ Response Body (Failed)   :
 
 ```json
 {
-  "errors" : "Unauthorized"
+  "errors" : "Unauthorized  "
 }
 ```
