@@ -92,3 +92,55 @@ describe('GET /api/contact/:contactId', () => {
 
     });
 });
+
+describe('PUT /api/contact/:contactId', () => {
+    beforeEach( async () => {
+        await UserTest.create()
+        await ContactTest.create()
+    })
+
+    afterEach( async () => {
+        await ContactTest.deleteAll()
+        await UserTest.delete()
+    })
+
+    it('should be able to update contact', async () => {
+        const contact = await ContactTest.get()
+        const response = await supertest(web)
+            .put(`/api/contacts/${contact.id}`)
+            .set("X-API-TOKEN", "test")
+            .send({
+                first_name: "test",
+                last_name: "test",
+                email: "test@example.com",
+                phone:"08123123"
+            })
+
+        logger.debug(response.body)
+        expect(response.status).toBe(200)
+        expect(response.body.data.id).toBeDefined()
+        expect(response.body.data.first_name).toBe(contact.first_name)
+        expect(response.body.data.last_name).toBe(contact.last_name)
+        expect(response.body.data.email).toBe(contact.email)
+        expect(response.body.data.phone).toBe(contact.phone)
+
+    });
+
+    it('should reject update contact if request is invalid', async () => {
+        const contact = await ContactTest.get()
+        const response = await supertest(web)
+            .put(`/api/contacts/${contact.id}`)
+            .set("X-API-TOKEN", "test")
+            .send({
+                first_name: "",
+                last_name: "",
+                email: "test",
+                phone:""
+            })
+
+        logger.debug(response.body)
+        expect(response.status).toBe(400)
+        expect(response.body.errors).toBeDefined()
+
+    });
+});
