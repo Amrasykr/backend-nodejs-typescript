@@ -12,6 +12,7 @@ import {ContactService} from "./contact-service";
 import {prismaClient} from "../application/database";
 import {ResponseError} from "../error/response-error";
 import {add} from "winston";
+import {map} from "zod";
 
 export class AddressService {
 
@@ -79,5 +80,17 @@ export class AddressService {
         })
 
         return toAddressResponse(address)
+    }
+
+    static async list(user: User, contactId: number): Promise<Array<AddressResponse>> {
+        await ContactService.checkContactMustExists(user.username, contactId)
+
+        const addresses = await prismaClient.address.findMany({
+            where : {
+                contact_id: contactId
+            }
+        })
+
+        return addresses.map((address) => toAddressResponse(address))
     }
 }

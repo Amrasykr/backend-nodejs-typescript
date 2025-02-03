@@ -248,7 +248,7 @@ describe('Address API', () => {
             const address = await AddressTest.get()
 
             const response = await supertest(web)
-                .del(`/api/contacts/${contact.id}/addresses/${address.id}`)
+                .delete(`/api/contacts/${contact.id}/addresses/${address.id}`)
                 .set("X-API-TOKEN", "test")
 
             logger.debug(response.body)
@@ -261,7 +261,7 @@ describe('Address API', () => {
             const address = await AddressTest.get()
 
             const response = await supertest(web)
-                .del(`/api/contacts/${contact.id}/addresses/${address.id + 1}`)
+                .delete(`/api/contacts/${contact.id}/addresses/${address.id + 1}`)
                 .set("X-API-TOKEN", "test")
 
             logger.debug(response.body)
@@ -274,7 +274,45 @@ describe('Address API', () => {
             const address = await AddressTest.get()
 
             const response = await supertest(web)
-                .del(`/api/contacts/${contact.id + 1}/addresses/${address.id}`)
+                .delete(`/api/contacts/${contact.id + 1}/addresses/${address.id}`)
+                .set("X-API-TOKEN", "test")
+
+            logger.debug(response.body)
+            expect(response.status).toBe(404)
+            expect(response.body.errors).toBeDefined()
+        });
+    });
+
+    describe('GET /api/contacts/:contactId/addresses', () => {
+        beforeEach( async () => {
+            await UserTest.create()
+            await ContactTest.create()
+            await AddressTest.create()
+        })
+
+        afterEach( async () => {
+            await AddressTest.deleteAll()
+            await ContactTest.deleteAll()
+            await UserTest.delete()
+        })
+
+        it('should be able to list addresses', async () => {
+            const contact = await ContactTest.get()
+
+            const response = await supertest(web)
+                .get(`/api/contacts/${contact.id}/addresses`)
+                .set("X-API-TOKEN", "test")
+
+            logger.debug(response.body)
+            expect(response.status).toBe(200)
+            expect(response.body.data.length).toBe(1)
+        });
+
+        it('should reject delete address if contact is not found', async () => {
+            const contact = await ContactTest.get()
+
+            const response = await supertest(web)
+                .get(`/api/contacts/${contact.id + 1}/addresses`)
                 .set("X-API-TOKEN", "test")
 
             logger.debug(response.body)
