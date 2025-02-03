@@ -232,5 +232,5 @@ describe('User API', () => {
             expect(response.body.errors).toBeDefined()
         });
     });
-    
+
 });
