@@ -23,6 +23,13 @@ export type UpdateContactRequest = {
     phone: string
 }
 
+export type SearchContactRequest = {
+    name?: string,
+    phone?: string,
+    email?: string,
+    page: number,
+    size: number
+}
 
 export const toContactResponse = (contact: Contact): ContactResponse => {
     return {
