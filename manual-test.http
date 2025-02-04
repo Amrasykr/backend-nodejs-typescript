@@ -1,0 +1,136 @@
+### Register User
+POST http://localhost:3000/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "ammmar",
+  "name" : "Ammar",
+  "password" : "secret"
+}
+
+### Login User
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "ammmar",
+  "password" : "secret2"
+}
+
+### Get User
+GET http://localhost:3000/api/users/current
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+### Logout User
+DELETE http://localhost:3000/api/users/current
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+### Update User Name
+PATCH http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+{
+  "name" : "Ammar Asysyakur"
+}
+
+### Update User Password
+PATCH http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+{
+  "password" : "secret2"
+}
+
+
+### Create Contact
+POST http://localhost:3000/api/contacts
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+{
+  "first_name": "Von",
+  "last_name": "Lyacon Victoria",
+  "email": "victorialycaon@gmail.com",
+  "phone": "08123123"
+}
+
+### Update Contact
+PUT http://localhost:3000/api/contacts/123
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+{
+  "first_name": "john",
+  "last_name": "doe",
+  "email": "john@gmail.com",
+  "phone": "08123123"
+}
+
+### Get Contact
+GET http://localhost:3000/api/contacts/129
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+### Delete Contact
+DELETE http://localhost:3000/api/contacts/128
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+### Search Contact
+GET http://localhost:3000/api/contacts?name=ly
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+
+### Add Contact
+POST http://localhost:3000/api/contacts/129/addresses
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+{
+  "street": "Luminare",
+  "city": "Square",
+  "province": "New",
+  "country": "Eridu",
+  "postal_code": "123123"
+}
+
+### Get Contact
+GET http://localhost:3000/api/contacts/129/addresses/51
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+### Update Contact
+PUT http://localhost:3000/api/contacts/129/addresses/51
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+{
+  "street": "Luminare Square",
+  "city": "Square a",
+  "province": "New Eridu",
+  "country": "Eridu a",
+  "postal_code": "1231232"
+}
+
+### List Contact
+GET http://localhost:3000/api/contacts/129/addresses
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f
+
+### Remove Contact
+DELETE http://localhost:3000/api/contacts/129/addresses/52
+Accept: application/json
+X-API-TOKEN: 31162061-9d40-4ec9-a803-f9f93496ec4f

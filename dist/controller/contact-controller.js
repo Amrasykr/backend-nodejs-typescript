@@ -45,7 +45,7 @@ class ContactController {
             try {
                 const request = req.body;
                 request.id = Number(req.params.contactId);
-                const response = yield contact_service_1.ContactService.create(req.user, request);
+                const response = yield contact_service_1.ContactService.update(req.user, request);
                 res.status(200).json({
                     data: response
                 });
