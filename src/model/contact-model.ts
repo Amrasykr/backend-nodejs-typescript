@@ -5,14 +5,14 @@ export type ContactResponse = {
     first_name: string,
     last_name?: string | null,
     email?: string | null,
-    phone: string
+    phone: string | null
 }
 
 export type CreateContactRequest = {
     first_name: string,
     last_name?: string,
     email?: string,
-    phone: string
+    phone?: string
 }
 
 export type UpdateContactRequest = {
@@ -20,7 +20,7 @@ export type UpdateContactRequest = {
     first_name: string,
     last_name?: string,
     email?: string,
-    phone: string
+    phone?: string
 }
 
 export type SearchContactRequest = {
